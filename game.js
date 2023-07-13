@@ -1,18 +1,18 @@
 const huntingGrounds = document.querySelector('#hunting-grounds');
 let GRIDSIZE = 4;
 
-function createRow(id){
+function createRow(){
     let row = document.createElement('div');
     row.classList.add('row');
-    row.classList.add(`${id}`);
     return row;
 }
 
-function createSquare(id, size) {
+function createSquare(row, column, size) {
     const square = document.createElement('div');
     square.classList.add('square');
     square.classList.add('rabbit');
-    square.classList.add(`${id}`);
+    square.classList.add(`row${row}`);
+    square.classList.add(`column${column}`);
     square.style.width = `${100/size}%`;
     square.addEventListener('click', toggleRabbit);
     square.textContent = '🐇';
@@ -32,7 +32,7 @@ function toggleRabbit(e) {
 for (let i = 0; i < GRIDSIZE; i+= 1) {
     let row = createRow(i);
     for (let j = 0; j < GRIDSIZE; j += 1) {
-        let square = createSquare(j, GRIDSIZE);
+        let square = createSquare(i, j, GRIDSIZE);
         row.appendChild(square);
     }
     huntingGrounds.appendChild(row);
