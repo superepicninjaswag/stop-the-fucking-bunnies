@@ -27,16 +27,6 @@ function toggleRabbit(e) {
     }
 }
 
-function adjustRabbitSize(e) {
-    let row = document.getElementsByClassName('row');
-    let squares = document.querySelectorAll('.square');
-    squares.forEach((square) => {
-        let width = row.offsetWidth;
-        square.style.fontSize = `${width/GRIDSIZE}px`;
-    });
-    console.log('yo');
-}
-
 for (let i = 0; i < GRIDSIZE; i+= 1) {
     let row = createRow();
     for (let j = 0; j < GRIDSIZE; j += 1) {
@@ -45,5 +35,3 @@ for (let i = 0; i < GRIDSIZE; i+= 1) {
     }
     huntingGrounds.appendChild(row);
 }
-
-window.addEventListener('resize', adjustRabbitSize);
