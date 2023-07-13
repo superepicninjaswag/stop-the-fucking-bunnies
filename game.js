@@ -16,6 +16,15 @@ function createSquare(size) {
     return square;
 }
 
+function toggleRabbit(square) {
+    square.classList.toggle('rabbit');
+    if (square.classList.contains('rabbit')) {
+        square.textContent = '🐇';
+    } else {
+        square.textContent = '';
+    }
+}
+
 for (let i = 0; i < GRIDSIZE; i+= 1) {
     let row = createRow();
     for (let j = 0; j < GRIDSIZE; j += 1) {
