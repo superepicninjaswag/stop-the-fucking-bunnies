@@ -1,5 +1,5 @@
 const huntingGrounds = document.querySelector('#hunting-grounds');
-let GRIDSIZE = 6;
+let GRIDSIZE = 4;
 
 function createRow(){
     let row = document.createElement('div');
@@ -10,19 +10,31 @@ function createRow(){
 function createSquare(size) {
     const square = document.createElement('div');
     square.classList.add('square');
+    square.classList.add('rabbit');
     square.style.width = `${100/size}%`;
-    square.style.aspectRatio = `1 / 1`;
+    square.addEventListener('click', toggleRabbit);
     square.textContent = '🐇';
     return square;
 }
 
-function toggleRabbit(square) {
+function toggleRabbit(e) {
+    let square = e.target;
     square.classList.toggle('rabbit');
     if (square.classList.contains('rabbit')) {
         square.textContent = '🐇';
     } else {
         square.textContent = '';
     }
+}
+
+function adjustRabbitSize(e) {
+    let row = document.getElementsByClassName('row');
+    let squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+        let width = row.offsetWidth;
+        square.style.fontSize = `${width/GRIDSIZE}px`;
+    });
+    console.log('yo');
 }
 
 for (let i = 0; i < GRIDSIZE; i+= 1) {
@@ -33,3 +45,5 @@ for (let i = 0; i < GRIDSIZE; i+= 1) {
     }
     huntingGrounds.appendChild(row);
 }
+
+window.addEventListener('resize', adjustRabbitSize);

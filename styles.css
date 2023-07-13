@@ -1,46 +1,62 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 3vh;
+    gap: 5vh;
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     text-align: center;
     margin: 0;
+    padding: 20px;
     background-color: whitesmoke;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 h1, h2 {
-    height: 3vh;
+    margin: 0;
+}
+
+@media (orientation: landscape) {
+    #hunting-grounds {
+        height: 70vh;
+    }
+}
+
+@media (orientation: portrait) {
+    #hunting-grounds {
+        width: 80vw;
+    }
 }
 
 #hunting-grounds {
-    width: 70vw;
-    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+
     aspect-ratio: 1 / 1;
-    margin-top: 5vh;
+    border: 1px dotted black;
 }
 
 .row {
     display: flex;
-    flex: 0 0 1;
 }
 
 .square {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
 
-    flex: 0 0 1;
-
-    border: 1px solid black;
-    background-color: darkred;
-
-    font-size: 8vw;
+    aspect-ratio: 1 / 1;
 }
 
 .square:hover{
-    background-color: red;
+    background-color: lightgray;
 }
-
-.rabbit {}
