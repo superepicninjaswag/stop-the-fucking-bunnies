@@ -1,5 +1,46 @@
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     text-align: center;
     margin: 0;
+    background-color: whitesmoke;
 }
+
+h1, h2 {
+    height: 3vh;
+}
+
+#hunting-grounds {
+    width: 70vw;
+    min-width: 200px;
+    aspect-ratio: 1 / 1;
+    margin-top: 5vh;
+}
+
+.row {
+    display: flex;
+    flex: 0 0 1;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex: 0 0 1;
+
+    border: 1px solid black;
+    background-color: darkred;
+
+    font-size: 8vw;
+}
+
+.square:hover{
+    background-color: red;
+}
+
+.rabbit {}
