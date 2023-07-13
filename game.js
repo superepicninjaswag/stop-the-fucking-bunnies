@@ -7,6 +7,13 @@ function createRow(){
     return row;
 }
 
+function generateRandomColour(minRed, maxRed, minGreen, maxGreen, minBlue, maxBlue){
+    let randomRed = Math.floor((Math.random() * (maxRed-minRed)) + minRed).toString(16).padStart(2, '0');
+    let randomGreen = Math.floor((Math.random() * (maxGreen-minGreen)) + minGreen).toString(16).padStart(2, '0');
+    let randomBlue = Math.floor((Math.random() * (maxBlue-minBlue)) + minBlue).toString(16).padStart(2, '0');
+    return randomRed + randomGreen + randomBlue;
+}
+
 function createSquare(row, column, size) {
     const square = document.createElement('div');
     square.classList.add('square');
@@ -16,13 +23,8 @@ function createSquare(row, column, size) {
     square.style.width = `${100/size}%`;
     square.addEventListener('click', cullRabbit);
     square.textContent = '🐇';
-    let darkLimit = 80;
-    let lightLimit = 230;
-    let randomRed = Math.floor(Math.random() * 30).toString(16).padStart(2, '0');
-    let randomGreen = Math.floor((Math.random() * (lightLimit-darkLimit)) + darkLimit).toString(16).padStart(2, '0');
-    let randomBlue = Math.floor(Math.random() * 30).toString(16).padStart(2, '0');
-    square.style.backgroundColor = "#" + randomRed + randomGreen + randomBlue;
-    console.log(`#${randomRed}${randomGreen}${randomBlue}`);
+    // Random green background
+    square.style.backgroundColor = "#" + generateRandomColour(0, 30, 50, 256, 0, 30);
     return square;
 }
 
@@ -37,24 +39,35 @@ function cullRabbit(e){
             column = parseInt(c.substring(6));
         }
     });
+    toggleRabbits(row, column);
 }
 
-function toggleRabbit(row, column) {
-    let rowOfSquares = document.querySelectorAll(`row${row}`);
-    let targetSquare;
-    rowOfSquares.forEach((square) => {
-        if (square.classList.contains(`column${column}`)) {
-            targetSquare = square;
+function toggleRabbits(row, column) {
+    const targetCoordinates = [
+        [row - 1, column],
+        [row, column - 1],
+        [row, column],
+        [row, column + 1],
+        [row + 1, column],
+    ];
+    for (const target of targetCoordinates) {
+        if (!(0 <= target[0] && target[0] < GRIDSIZE && 0 <= target[1] && target[1] < GRIDSIZE)) {
+            // invalid coordinate
+            continue;
         }
-    });
-    targetSquare.classList.toggle('rabbit');
-    if (targetSquare.classList.contains('rabbit')) {
-        targetSquare.textContent = '🐇';
-    } else {
-        targetSquare.textContent = '';
+        let targetSquare = document.querySelector(`.row${target[0]}.column${target[1]}`);
+        targetSquare.classList.toggle('rabbit');
+        if (targetSquare.classList.contains('rabbit')) {
+            targetSquare.textContent = '🐇';
+            targetSquare.style.backgroundColor = "#" + generateRandomColour(0, 30, 50, 256, 0, 30);
+        } else {
+            targetSquare.textContent = '';
+            targetSquare.style.backgroundColor = "#" + generateRandomColour(150, 256, 0, 50, 0, 50);
+        }
     }
 }
 
+// Generate grid
 for (let i = 0; i < GRIDSIZE; i+= 1) {
     let row = createRow(i);
     for (let j = 0; j < GRIDSIZE; j += 1) {
