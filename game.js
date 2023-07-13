@@ -14,18 +14,44 @@ function createSquare(row, column, size) {
     square.classList.add(`row${row}`);
     square.classList.add(`column${column}`);
     square.style.width = `${100/size}%`;
-    square.addEventListener('click', toggleRabbit);
+    square.addEventListener('click', cullRabbit);
     square.textContent = '🐇';
+    let darkLimit = 80;
+    let lightLimit = 230;
+    let randomRed = Math.floor(Math.random() * 30).toString(16).padStart(2, '0');
+    let randomGreen = Math.floor((Math.random() * (lightLimit-darkLimit)) + darkLimit).toString(16).padStart(2, '0');
+    let randomBlue = Math.floor(Math.random() * 30).toString(16).padStart(2, '0');
+    square.style.backgroundColor = "#" + randomRed + randomGreen + randomBlue;
+    console.log(`#${randomRed}${randomGreen}${randomBlue}`);
     return square;
 }
 
-function toggleRabbit(e) {
+function cullRabbit(e){
     let square = e.target;
-    square.classList.toggle('rabbit');
-    if (square.classList.contains('rabbit')) {
-        square.textContent = '🐇';
+    let row;
+    let column;
+    square.classList.forEach((c) => {
+        if (c.startsWith('row')) {
+            row = parseInt(c.substring(3));
+        } else if (c.startsWith('column')) {
+            column = parseInt(c.substring(6));
+        }
+    });
+}
+
+function toggleRabbit(row, column) {
+    let rowOfSquares = document.querySelectorAll(`row${row}`);
+    let targetSquare;
+    rowOfSquares.forEach((square) => {
+        if (square.classList.contains(`column${column}`)) {
+            targetSquare = square;
+        }
+    });
+    targetSquare.classList.toggle('rabbit');
+    if (targetSquare.classList.contains('rabbit')) {
+        targetSquare.textContent = '🐇';
     } else {
-        square.textContent = '';
+        targetSquare.textContent = '';
     }
 }
 
