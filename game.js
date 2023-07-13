@@ -1,5 +1,5 @@
 const huntingGrounds = document.querySelector('#hunting-grounds');
-let GRIDSIZE = 4;
+let GRIDSIZE = 3;
 
 function createRow(){
     let row = document.createElement('div');
@@ -17,14 +17,17 @@ function generateRandomColour(minRed, maxRed, minGreen, maxGreen, minBlue, maxBl
 function createSquare(row, column, size) {
     const square = document.createElement('div');
     square.classList.add('square');
-    square.classList.add('rabbit');
+    if (Math.random() < 0.5) {
+        square.classList.add('rabbit');
+        square.textContent = '🐇';
+        square.style.backgroundColor = "#" + generateRandomColour(0, 30, 50, 256, 0, 30);
+    } else {
+        square.style.backgroundColor = "#" + generateRandomColour(150, 256, 0, 50, 0, 50);
+    }
     square.classList.add(`row${row}`);
     square.classList.add(`column${column}`);
     square.style.width = `${100/size}%`;
     square.addEventListener('click', cullRabbit);
-    square.textContent = '🐇';
-    // Random green background
-    square.style.backgroundColor = "#" + generateRandomColour(0, 30, 50, 256, 0, 30);
     return square;
 }
 
