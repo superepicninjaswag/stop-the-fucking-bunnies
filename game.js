@@ -80,3 +80,7 @@ function generateGrid() {
         HUNTINGGROUNDS.appendChild(row);
     }
 }
+
+function updateGridSize(newSize) {
+    gridSize = newSize;
+}
