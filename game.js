@@ -83,8 +83,8 @@ function generateGrid() {
 }
 
 function updateGridSize(adjustment) {
-    let upperLimit = 7;
-    let lowerLimit = 1;
+    let upperLimit = 4;
+    let lowerLimit = 2;
     let newGridSize = gridSize + adjustment; 
     if (lowerLimit <= newGridSize && newGridSize <= upperLimit) {
         gridSize = newGridSize;
