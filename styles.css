@@ -23,6 +23,10 @@ h1, h2 {
     margin: 0;
 }
 
+h2 {
+    display: inline-block;
+}
+
 @media (orientation: landscape) {
     #hunting-grounds {
         height: 70vh;
@@ -55,4 +59,11 @@ h1, h2 {
     flex-shrink: 0;
 
     aspect-ratio: 1 / 1;
+}
+
+.size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }

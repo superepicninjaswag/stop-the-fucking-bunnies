@@ -71,6 +71,7 @@ function toggleRabbits(row, column) {
 }
 
 function generateGrid() {
+    HUNTINGGROUNDS.textContent = '';    // Destroy any existing squares
     for (let i = 0; i < gridSize; i+= 1) {
         let row = createRow(i);
         for (let j = 0; j < gridSize; j += 1) {
@@ -81,6 +82,25 @@ function generateGrid() {
     }
 }
 
-function updateGridSize(newSize) {
-    gridSize = newSize;
+function updateGridSize(adjustment) {
+    let upperLimit = 7;
+    let lowerLimit = 1;
+    let newGridSize = gridSize + adjustment; 
+    if (lowerLimit <= newGridSize && newGridSize <= upperLimit) {
+        gridSize = newGridSize;
+        generateGrid();
+    }
 }
+
+let minusButton = document.querySelector('#minus');
+let plusButton = document.querySelector('#plus');
+
+minusButton.addEventListener('click', (e) => {
+    updateGridSize(-1);
+});
+
+plusButton.addEventListener('click', (e) => {
+    updateGridSize(1);
+});
+
+generateGrid();
