@@ -1,5 +1,5 @@
-const huntingGrounds = document.querySelector('#hunting-grounds');
-let GRIDSIZE = 3;
+const HUNTINGGROUNDS = document.querySelector('#hunting-grounds');
+let gridSize = 4;
 
 function createRow(){
     let row = document.createElement('div');
@@ -54,7 +54,7 @@ function toggleRabbits(row, column) {
         [row + 1, column],
     ];
     for (const target of targetCoordinates) {
-        if (!(0 <= target[0] && target[0] < GRIDSIZE && 0 <= target[1] && target[1] < GRIDSIZE)) {
+        if (!(0 <= target[0] && target[0] < gridSize && 0 <= target[1] && target[1] < gridSize)) {
             // invalid coordinate
             continue;
         }
@@ -70,12 +70,13 @@ function toggleRabbits(row, column) {
     }
 }
 
-// Generate grid
-for (let i = 0; i < GRIDSIZE; i+= 1) {
-    let row = createRow(i);
-    for (let j = 0; j < GRIDSIZE; j += 1) {
-        let square = createSquare(i, j, GRIDSIZE);
-        row.appendChild(square);
+function generateGrid() {
+    for (let i = 0; i < gridSize; i+= 1) {
+        let row = createRow(i);
+        for (let j = 0; j < gridSize; j += 1) {
+            let square = createSquare(i, j, gridSize);
+            row.appendChild(square);
+        }
+        HUNTINGGROUNDS.appendChild(row);
     }
-    huntingGrounds.appendChild(row);
 }
