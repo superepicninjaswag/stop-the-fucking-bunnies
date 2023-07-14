@@ -1,5 +1,6 @@
 const HUNTINGGROUNDS = document.querySelector('#hunting-grounds');
-let gridSize = 4;
+let sizeIndex = 1;
+let validSizes = [2, 3, 6, 7, 8, 10, 12, 13, 15, 18, 20, 21];
 
 function createRow(){
     let row = document.createElement('div');
@@ -54,7 +55,10 @@ function toggleRabbits(row, column) {
         [row + 1, column],
     ];
     for (const target of targetCoordinates) {
-        if (!(0 <= target[0] && target[0] < gridSize && 0 <= target[1] && target[1] < gridSize)) {
+        let gridSize = validSizes[sizeIndex];
+        let validX = 0 <= target[0] && target[0] < gridSize;
+        let validY = 0 <= target[1] && target[1] < gridSize;
+        if (!validX && !validY) {
             // invalid coordinate
             continue;
         }
@@ -72,6 +76,7 @@ function toggleRabbits(row, column) {
 
 function generateGrid() {
     HUNTINGGROUNDS.textContent = '';    // Destroy any existing squares
+    let gridSize = validSizes[sizeIndex];
     for (let i = 0; i < gridSize; i+= 1) {
         let row = createRow(i);
         for (let j = 0; j < gridSize; j += 1) {
@@ -82,8 +87,24 @@ function generateGrid() {
     }
 }
 
+function updateGridSize(adjustment) {
+    let newSizeIndex = sizeIndex + adjustment; 
+    if (0 <= newSizeIndex && newSizeIndex < validSizes.length) {
+        sizeIndex = newSizeIndex;
+        generateGrid();
+    }
+}
+
+let minusButton = document.querySelector('#minus');
+let plusButton = document.querySelector('#plus');
 let refreshButton = document.querySelector('#refresh');
 
+minusButton.addEventListener('click', (e) => {
+    updateGridSize(-1);
+});
+plusButton.addEventListener('click', (e) => {
+    updateGridSize(1);
+});
 refreshButton.addEventListener('click', (e) => {
     generateGrid();
 });
