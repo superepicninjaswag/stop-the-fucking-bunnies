@@ -97,7 +97,7 @@ function updateGridSize(adjustment) {
 
 let minusButton = document.querySelector('#minus');
 let plusButton = document.querySelector('#plus');
-let refreshButton = document.querySelector('#refresh');
+let newButton = document.querySelector('#new');
 
 minusButton.addEventListener('click', (e) => {
     updateGridSize(-1);
@@ -105,7 +105,7 @@ minusButton.addEventListener('click', (e) => {
 plusButton.addEventListener('click', (e) => {
     updateGridSize(1);
 });
-refreshButton.addEventListener('click', (e) => {
+newButton.addEventListener('click', (e) => {
     generateGrid();
 });
 
