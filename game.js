@@ -82,25 +82,11 @@ function generateGrid() {
     }
 }
 
-function updateGridSize(adjustment) {
-    let upperLimit = 4;
-    let lowerLimit = 2;
-    let newGridSize = gridSize + adjustment; 
-    if (lowerLimit <= newGridSize && newGridSize <= upperLimit) {
-        gridSize = newGridSize;
-        generateGrid();
-    }
-}
+let refreshButton = document.querySelector('#refresh');
 
-let minusButton = document.querySelector('#minus');
-let plusButton = document.querySelector('#plus');
-
-minusButton.addEventListener('click', (e) => {
-    updateGridSize(-1);
+refreshButton.addEventListener('click', (e) => {
+    generateGrid();
 });
 
-plusButton.addEventListener('click', (e) => {
-    updateGridSize(1);
-});
 
 generateGrid();
