@@ -58,7 +58,7 @@ function toggleRabbits(row, column) {
         let gridSize = validSizes[sizeIndex];
         let validX = 0 <= target[0] && target[0] < gridSize;
         let validY = 0 <= target[1] && target[1] < gridSize;
-        if (!validX && !validY) {
+        if (!validX || !validY) {
             // invalid coordinate
             continue;
         }
