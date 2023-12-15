@@ -1,4 +1,4 @@
-# Too Many Rabbits
+# Stop The Fucking Bunnies
 This project demonstrates proficiency at working with the DOM and events.
 
 # References
